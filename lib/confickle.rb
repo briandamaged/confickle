@@ -3,12 +3,12 @@ class Confickle
 
   attr_reader :root, :symbolize_names
 
-  def initialize(options = {})
+  def initialize(options)
     if options.is_a? String
       options = {root: options}
     end
 
-    @root            = options.fetch(:root)
+    @root            = File.absolute_path(options.fetch(:root))
     @symbolize_names = options.fetch(:symbolize_names, true)
   end
 
