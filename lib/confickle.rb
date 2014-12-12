@@ -1,4 +1,6 @@
 
+require 'json'
+
 class Confickle
 
   attr_reader :root, :symbolize_names
@@ -22,7 +24,18 @@ class Confickle
   end
 
   def json(*args)
-    JSON.parse(self.content(*args), symbolize_names: true)
+    if args.last.is_a? Hash
+      args    = args.dup
+      options = args.pop
+    else
+      options = {}
+    end
+
+    sn = options.fetch(:symbolize_names, self.symbolize_names)
+    JSON.parse(
+      self.content(*args),
+      symbolize_names: sn
+    )
   end
 
 
