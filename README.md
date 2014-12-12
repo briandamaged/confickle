@@ -1,14 +1,16 @@
-= Confickle =
+[![Gem Version](https://badge.fury.io/rb/confickle.svg)](http://badge.fury.io/rb/confickle)
+
+# Confickle #
 
 Simplified access to config files.
 
-== Installation ==
+## Installation ##
 
     gem install confickle
 
-== Usage ==
+## Usage ##
 
-=== Basic ===
+### Basic ###
 
     require 'confickle'
 
@@ -28,7 +30,7 @@ Simplified access to config files.
     puts json[:some_key]
 
 
-=== Slightly More Advanced ===
+### Slightly More Advanced ###
 
 Guess what?  You can specify default behaviors when creating a Confickle instance:
 
