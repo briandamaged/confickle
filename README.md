@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/confickle.svg)](http://badge.fury.io/rb/confickle)
+[![Gem Version](https://badge.fury.io/rb/confickle.svg)](http://badge.fury.io/rb/confickle) [![Tips](http://img.shields.io/gratipay/briandamaged.svg)](https://gratipay.com/briandamaged/)
 
 # Confickle #
 
