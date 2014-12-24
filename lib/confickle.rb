@@ -22,6 +22,7 @@ class Confickle
   def content(*args)
     File.read(self.path(*args))
   end
+  alias_method :contents, :content
 
   def json(*args)
     if args.last.is_a? Hash
