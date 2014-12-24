@@ -1,5 +1,6 @@
 
 require 'json'
+require 'yaml'
 
 class Confickle
 
@@ -39,6 +40,52 @@ class Confickle
     )
   end
 
+
+  def yaml(*args)
+    if args.last.is_a? Hash
+      args    = args.dup
+      options = args.pop
+    else
+      options = {}
+    end
+
+    retval = YAML.load_file(path(*args))
+
+    sn = options.fetch(:symbolize_names, self.symbolize_names)
+    if sn
+      recursively_symbolize(retval)
+    else
+      retval
+    end
+  end
+
+
+
+  def recursively_symbolize(thing)
+    if thing.is_a? Hash
+      recursively_symbolize_hash(thing)
+    elsif thing.is_a? Array
+      recursively_symbolize_array(thing)
+    else
+      thing
+    end
+  end
+
+  def recursively_symbolize_hash(thing)
+    retval = {}
+    thing.each do |k, v|
+      key       = (k.is_a? String) ? k.to_sym : k
+      value     = recursively_symbolize(v)
+
+      retval[key] = value
+    end
+
+    retval
+  end
+
+  def recursively_symbolize_array(thing)
+    thing.map{|e| recursively_symbolize(e) }
+  end
 
 end
 
