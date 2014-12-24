@@ -2,6 +2,8 @@
 require 'json'
 require 'yaml'
 
+require 'recsym'
+
 class Confickle
 
   attr_reader :root, :symbolize_names
@@ -53,39 +55,12 @@ class Confickle
 
     sn = options.fetch(:symbolize_names, self.symbolize_names)
     if sn
-      recursively_symbolize(retval)
+      RecSym.this(retval)
     else
       retval
     end
   end
 
-
-
-  def recursively_symbolize(thing)
-    if thing.is_a? Hash
-      recursively_symbolize_hash(thing)
-    elsif thing.is_a? Array
-      recursively_symbolize_array(thing)
-    else
-      thing
-    end
-  end
-
-  def recursively_symbolize_hash(thing)
-    retval = {}
-    thing.each do |k, v|
-      key       = (k.is_a? String) ? k.to_sym : k
-      value     = recursively_symbolize(v)
-
-      retval[key] = value
-    end
-
-    retval
-  end
-
-  def recursively_symbolize_array(thing)
-    thing.map{|e| recursively_symbolize(e) }
-  end
 
 end
 
